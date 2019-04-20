@@ -187,9 +187,12 @@
 <li>database/sql 中的连接池？</li>
 <li>使用连接池管理Thrift链接？</li>
 </ol>
-        
-          <a class="article-more-a" href="/2019/04/20/TCP连接池-TCP-UDP知识/#more">more >></a>
-        
+<p>more</p>
+<p>以下主要使用Golang作为编程语言</p>
+<h2 id="为什么需要连接池"><a href="#为什么需要连接池" class="headerlink" title="为什么需要连接池"></a>为什么需要连接池</h2><p>使用连接池最大的一个好处就是减少连接的创建和关闭，增加系统负载能力。</p>
+<p>遇到一个问题：<a href="http://silenceper.com/blog/201601/tcp_time_wait_error/" target="_blank" rel="noopener">TCP_TIME_WAIT连接数过多导致服务不可用</a>，因为未开启数据库连接池，再加上mysql并发较大，导致需要频繁的创建链接，最终产生了上万的TIME_WAIT的tcp链接，影响了系统性能。</p>
+<p>链接池中的的功能主要是管理一堆的链接，包括创建和关闭</p>
+
       
 
       
