@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="ZZJ-Blog">
 <meta property="og:description" content="tcp">
 <meta property="og:locale" content="zh-cn">
-<meta property="og:updated_time" content="2019-04-20T15:43:38.008Z">
+<meta property="og:updated_time" content="2019-04-20T15:47:08.755Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="TCP连接池 &amp; TCP&#x2F;UDP知识">
 <meta name="twitter:description" content="tcp">
@@ -193,15 +193,12 @@
 <p>链接池中的的功能主要是管理一堆的链接，包括创建和关闭</p>
 <h2 id="连接失效问题"><a href="#连接失效问题" class="headerlink" title="连接失效问题"></a>连接失效问题</h2><p>使用连接池之后就不再是短连接，而是长连接了，就引发了一些问题：</p>
 <ol>
-<li><p>长时间空闲，连接断开</p>
-<p> 因为网络环境是复杂的，中间可能因为防火墙等原因，导致长时间空闲的连接会断开，所以可以通过两个方法来解决：</p>
-<ul>
+<li>长时间空闲，连接断开<br> 因为网络环境是复杂的，中间可能因为防火墙等原因，导致长时间空闲的连接会断开，所以可以通过两个方法来解决：<ul>
 <li>客户端增加心跳，定时的给服务端发送请求</li>
 <li>给连接池中的连接增加最大空闲时间，超时的连接不再使用</li>
 </ul>
 </li>
-<li><p>当服务端重启之后，连接失效</p>
-<p> 远程服务端很有可能重启，那么之前创建的链接就失效了。客户端在使用的时候就需要判断这些失效的连接并丢弃，在<code>database/sql</code>中就判断了这些失效的连接，使用这种错误表示<code>var ErrBadConn = errors.New(&quot;driver: bad connection&quot;)</code><br> 在<code>database/sql</code>对这种<code>ErrBadConn</code>错误进行了重试，默认重试次数是<code>两次</code>，所以能够保证即便是链接失效或者断开了，本次的请求能够正常响应.</p>
+<li><p>当服务端重启之后，连接失效<br> 远程服务端很有可能重启，那么之前创建的链接就失效了。客户端在使用的时候就需要判断这些失效的连接并丢弃，在<code>database/sql</code>中就判断了这些失效的连接，使用这种错误表示<code>var ErrBadConn = errors.New(&quot;driver: bad connection&quot;)</code><br> 在<code>database/sql</code>对这种<code>ErrBadConn</code>错误进行了重试，默认重试次数是<code>两次</code>，所以能够保证即便是链接失效或者断开了，本次的请求能够正常响应.</p>
 <p> <strong>连接失效的特征</strong></p>
 <ul>
 <li>对连接进行<code>read</code>读操作时，返回<code>EOF</code>错误</li>
@@ -219,7 +216,8 @@
  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rows, err := db.Query(&quot;select * from table1&quot;)</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>在调用db.Query方法如下：</p>
-<pre><code>func (db *DB) Query(query string, args ...interface{}) (*Rows, error) {
+<pre><code>
+func (db *DB) Query(query string, args ...interface{}) (*Rows, error) {
     var rows *Rows
     var err error
     //这里就做了对失效的链接的重试操作
