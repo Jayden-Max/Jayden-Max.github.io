@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="ZZJ-Blog">
 <meta property="og:description" content="tcp">
 <meta property="og:locale" content="zh-cn">
-<meta property="og:updated_time" content="2019-04-20T15:15:17.341Z">
+<meta property="og:updated_time" content="2019-04-20T15:43:38.008Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="TCP连接池 &amp; TCP&#x2F;UDP知识">
 <meta name="twitter:description" content="tcp">
@@ -181,17 +181,63 @@
       
         <h2 id="TCP知识"><a href="#TCP知识" class="headerlink" title="TCP知识"></a>TCP知识</h2><p><a href="https://ws1.sinaimg.cn/large/65209136gy1ft4il0hnauj21hc0u0798.jpg" target="_blank" rel="noopener"></a></p>
 <h3 id="概览："><a href="#概览：" class="headerlink" title="概览："></a>概览：</h3><ol>
-<li>为什么需要连接池？</li>
-<li>连接失效问题？</li>
-<li>database/sql 中的连接池？</li>
-<li>使用连接池管理Thrift链接？</li>
+<li>为什么需要连接池</li>
+<li>连接失效问题</li>
+<li>database/sql 中的连接池</li>
+<li>tcp - 三次握手 &amp; 四次挥手</li>
 </ol>
 <a id="more"></a>
 <p>以下主要使用Golang作为编程语言</p>
 <h2 id="为什么需要连接池"><a href="#为什么需要连接池" class="headerlink" title="为什么需要连接池"></a>为什么需要连接池</h2><p>使用连接池最大的一个好处就是减少连接的创建和关闭，增加系统负载能力。</p>
 <p>遇到一个问题：<a href="http://silenceper.com/blog/201601/tcp_time_wait_error/" target="_blank" rel="noopener">TCP_TIME_WAIT连接数过多导致服务不可用</a>，因为未开启数据库连接池，再加上mysql并发较大，导致需要频繁的创建链接，最终产生了上万的TIME_WAIT的tcp链接，影响了系统性能。</p>
 <p>链接池中的的功能主要是管理一堆的链接，包括创建和关闭</p>
+<h2 id="连接失效问题"><a href="#连接失效问题" class="headerlink" title="连接失效问题"></a>连接失效问题</h2><p>使用连接池之后就不再是短连接，而是长连接了，就引发了一些问题：</p>
+<ol>
+<li><p>长时间空闲，连接断开</p>
+<p> 因为网络环境是复杂的，中间可能因为防火墙等原因，导致长时间空闲的连接会断开，所以可以通过两个方法来解决：</p>
+<ul>
+<li>客户端增加心跳，定时的给服务端发送请求</li>
+<li>给连接池中的连接增加最大空闲时间，超时的连接不再使用</li>
+</ul>
+</li>
+<li><p>当服务端重启之后，连接失效</p>
+<p> 远程服务端很有可能重启，那么之前创建的链接就失效了。客户端在使用的时候就需要判断这些失效的连接并丢弃，在<code>database/sql</code>中就判断了这些失效的连接，使用这种错误表示<code>var ErrBadConn = errors.New(&quot;driver: bad connection&quot;)</code><br> 在<code>database/sql</code>对这种<code>ErrBadConn</code>错误进行了重试，默认重试次数是<code>两次</code>，所以能够保证即便是链接失效或者断开了，本次的请求能够正常响应.</p>
+<p> <strong>连接失效的特征</strong></p>
+<ul>
+<li>对连接进行<code>read</code>读操作时，返回<code>EOF</code>错误</li>
+<li>对连接进行<code>write</code>操作时，返回<code>write tcp 127.0.0.1:52089-&gt;127.0.0.1:8002: write: broken pipe</code>错误</li>
+</ul>
+</li>
+</ol>
+<h2 id="database-sql-中的连接池"><a href="#database-sql-中的连接池" class="headerlink" title="database/sql 中的连接池"></a>database/sql 中的连接池</h2><p>在database/sql中使用连接连接池很简单，主要涉及下面这些配置：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">db.SetMaxIdleConns(10) //连接池中最大空闲连接数</span><br><span class="line">db.SetMaxOpenConns(20) //打开的最大连接数</span><br><span class="line">db.SetConnMaxLifetime(300*time.Second)//连接的最大空闲时间(可选)</span><br></pre></td></tr></table></figure>
+<p>DB结构与说明：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">type DB struct &#123;</span><br><span class="line">    //具体的数据库实现的interface&#123;&#125;,</span><br><span class="line">    //例如https://github.com/go-sql-driver/mysql 就注册并并实现了driver.Open方法，主要是在里面实现了一些鉴权的操作</span><br><span class="line">    driver driver.Driver  </span><br><span class="line">    //dsn连接</span><br><span class="line">    dsn    string</span><br><span class="line">    //在prepared statement中用到</span><br><span class="line">    numClosed uint64</span><br><span class="line"></span><br><span class="line">    mu           sync.Mutex // protects following fields</span><br><span class="line">    //可使用的空闲的链接</span><br><span class="line">    freeConn     []*driverConn</span><br><span class="line">    //用来传递连接请求的管道</span><br><span class="line">    connRequests []chan connRequest</span><br><span class="line">    //当前打开的连接数</span><br><span class="line">    numOpen      int    </span><br><span class="line">    //当需要创建新的链接的时候，往这个管道中发送一个struct数据，</span><br><span class="line">    //因为在Open数据库的就启用了一个goroutine执行connectionOpener方法读取管道中的数据</span><br><span class="line">    openerCh    chan struct&#123;&#125;</span><br><span class="line">    //数据库是否已经被关闭</span><br><span class="line">    closed      bool</span><br><span class="line">    //用来保证锁被正确的关闭</span><br><span class="line">    dep         map[finalCloser]depSet</span><br><span class="line">    //stacktrace of last conn&apos;s put; debug only</span><br><span class="line">    lastPut     map[*driverConn]string </span><br><span class="line">    //最大空闲连接</span><br><span class="line">    maxIdle     int                  </span><br><span class="line">    //最大打开的连接</span><br><span class="line">    maxOpen     int                    </span><br><span class="line">    //连接的最大空闲时间</span><br><span class="line">    maxLifetime time.Duration          </span><br><span class="line">    //定时清理空闲连接的管道</span><br><span class="line">    cleanerCh   chan struct&#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>例子：</p>
+<ul>
+<li><p>查询语句：</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rows, err := db.Query(&quot;select * from table1&quot;)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在调用db.Query方法如下：</p>
+<pre><code>func (db *DB) Query(query string, args ...interface{}) (*Rows, error) {
+    var rows *Rows
+    var err error
+    //这里就做了对失效的链接的重试操作
+    for i := 0; i &lt; maxBadConnRetries; i++ {
+        rows, err = db.query(query, args, cachedOrNewConn)
+        if err != driver.ErrBadConn {
+            break
+        }
+    }
+    if err == driver.ErrBadConn {
+        return db.query(query, args, alwaysNewConn)
+    }
+    return rows, err
+}
 
+</code></pre></li>
+</ul>
+<h2 id="tcp-三次握手-amp-四次挥手"><a href="#tcp-三次握手-amp-四次挥手" class="headerlink" title="tcp - 三次握手 &amp; 四次挥手"></a>tcp - 三次握手 &amp; 四次挥手</h2>
       
 
       
@@ -339,7 +385,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#TCP知识"><span class="toc-number">1.</span> <span class="toc-text">TCP知识</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#概览："><span class="toc-number">1.1.</span> <span class="toc-text">概览：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#为什么需要连接池"><span class="toc-number">2.</span> <span class="toc-text">为什么需要连接池</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#TCP知识"><span class="toc-number">1.</span> <span class="toc-text">TCP知识</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#概览："><span class="toc-number">1.1.</span> <span class="toc-text">概览：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#为什么需要连接池"><span class="toc-number">2.</span> <span class="toc-text">为什么需要连接池</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#连接失效问题"><span class="toc-number">3.</span> <span class="toc-text">连接失效问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#database-sql-中的连接池"><span class="toc-number">4.</span> <span class="toc-text">database/sql 中的连接池</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#tcp-三次握手-amp-四次挥手"><span class="toc-number">5.</span> <span class="toc-text">tcp - 三次握手 &amp; 四次挥手</span></a></li></ol>
                     </div>
                 </span>
             </div>
