@@ -18,7 +18,7 @@
 <meta property="og:locale" content="zh-cn">
 <meta property="og:image" content="https://ws1.sinaimg.cn/large/65209136gy1ft4il0hnauj21hc0u0798.jpg">
 <meta property="og:image" content="https://img-blog.csdn.net/20160924200243324">
-<meta property="og:updated_time" content="2019-04-21T15:33:02.284Z">
+<meta property="og:updated_time" content="2019-04-22T02:06:34.094Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="TCP连接池 &amp; TCP&#x2F;UDP知识">
 <meta name="twitter:description" content="tcp">
@@ -219,8 +219,7 @@
  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rows, err := db.Query(&quot;select * from table1&quot;)</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>在调用db.Query方法如下：</p>
-<pre><code>
-func (db *DB) Query(query string, args ...interface{}) (*Rows, error) {
+<pre><code>func (db *DB) Query(query string, args ...interface{}) (*Rows, error) {
     var rows *Rows
     var err error
     //这里就做了对失效的链接的重试操作
@@ -230,6 +229,7 @@ func (db *DB) Query(query string, args ...interface{}) (*Rows, error) {
             break
         }
     }
+
     if err == driver.ErrBadConn {
         return db.query(query, args, alwaysNewConn)
     }
