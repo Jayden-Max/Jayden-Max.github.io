@@ -8,18 +8,18 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>.PHONY原理与作用 | ZZJ-Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="单词phony：伪造的，假的。`If you describe something as phoney, you disapprove of if because it is false ranther than genuine.  在Makefile中，.PHONY后面的target表示的也是一个伪造的target, 而不是真实存在的文件target，注意Makefile的target默认是文件">
+  <meta name="description" content="单词phony：伪造的，假的。  If you describe something as phoney, you disapprove of if because it is false ranther than genuine.   在Makefile中，.PHONY后面的target表示的也是一个伪造的target, 而不是真实存在的文件target，注意Makefile的target默认是">
 <meta name="keywords" content="makefile,linux">
 <meta property="og:type" content="article">
 <meta property="og:title" content=".PHONY原理与作用">
 <meta property="og:url" content="http://yoursite.com/2019/11/14/PHONY原理与作用/index.html">
 <meta property="og:site_name" content="ZZJ-Blog">
-<meta property="og:description" content="单词phony：伪造的，假的。`If you describe something as phoney, you disapprove of if because it is false ranther than genuine.  在Makefile中，.PHONY后面的target表示的也是一个伪造的target, 而不是真实存在的文件target，注意Makefile的target默认是文件">
+<meta property="og:description" content="单词phony：伪造的，假的。  If you describe something as phoney, you disapprove of if because it is false ranther than genuine.   在Makefile中，.PHONY后面的target表示的也是一个伪造的target, 而不是真实存在的文件target，注意Makefile的target默认是">
 <meta property="og:locale" content="zh-cn">
-<meta property="og:updated_time" content="2019-11-14T06:32:59.605Z">
+<meta property="og:updated_time" content="2019-11-14T06:59:16.300Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content=".PHONY原理与作用">
-<meta name="twitter:description" content="单词phony：伪造的，假的。`If you describe something as phoney, you disapprove of if because it is false ranther than genuine.  在Makefile中，.PHONY后面的target表示的也是一个伪造的target, 而不是真实存在的文件target，注意Makefile的target默认是文件">
+<meta name="twitter:description" content="单词phony：伪造的，假的。  If you describe something as phoney, you disapprove of if because it is false ranther than genuine.   在Makefile中，.PHONY后面的target表示的也是一个伪造的target, 而不是真实存在的文件target，注意Makefile的target默认是">
   
     <link rel="alternative" href="/atom.xml" title="ZZJ-Blog" type="application/atom+xml">
   
@@ -197,12 +197,15 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>单词phony：伪造的，假的。`If you describe something as phoney, you disapprove of if because it is false ranther than genuine.</p>
+        <p>单词phony：伪造的，假的。</p>
+<blockquote>
+<p>If you describe something as phoney, you disapprove of if because it is false ranther than genuine.</p>
+</blockquote>
 <blockquote>
 <p>在Makefile中，.PHONY后面的target表示的也是一个伪造的target, 而不是真实存在的文件target，注意Makefile的target默认是文件。</p>
 </blockquote>
+<h3 id="1-先看makefile核心规则"><a href="#1-先看makefile核心规则" class="headerlink" title="1. 先看makefile核心规则"></a>1. 先看makefile核心规则</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">target: prerequisites</span><br><span class="line">    command...</span><br></pre></td></tr></table></figure>
 <a id="more"></a>
-<h3 id="先看makefile核心规则"><a href="#先看makefile核心规则" class="headerlink" title="先看makefile核心规则"></a>先看makefile核心规则</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">target: prerequisites</span><br><span class="line">    command...</span><br></pre></td></tr></table></figure>
 <p>make解析执行makefile判断过程：</p>
 <ul>
 <li><p>若target不存在，则根据prerequisites，执行command</p>
@@ -218,24 +221,19 @@
 </ul>
 </li>
 </ul>
-<ol>
-<li><p>target</p>
-<p> 可以是一个object file（目标文件），也可以是一个执行文件，还可以是一个标签（label）。对 于标签这种特性，在后续的“伪目标”章节中会有叙述。</p>
-</li>
-<li><p>prerequisites</p>
-<p> 生成该target所依赖的文件和/或target</p>
-</li>
-<li><p>command</p>
-<p> 该target要执行的命令（任意的shell命令）</p>
-</li>
-</ol>
-<p><strong><code>prerequisites中如果有一个以上的文件比target文件要新的话，command所定义的命令就会被执行。</code></strong></p>
+<p><strong>target</strong></p>
+<pre><code>可以是一个object file（目标文件），也可以是一个执行文件，还可以是一个标签（label）。对 于标签这种特性，在后续的“伪目标”章节中会有叙述。
+</code></pre><p><strong>prerequisites</strong></p>
+<pre><code>生成该target所依赖的文件和/或target
+</code></pre><p><strong>command</strong></p>
+<pre><code>该target要执行的命令（任意的shell命令）
+</code></pre><p><strong><code>prerequisites中如果有一个以上的文件比target文件要新的话，command所定义的命令就会被执行。</code></strong></p>
 <p>这就是makefile的规则，也就是makefile中最核心的内容。</p>
-<h3 id="为什么需要伪目标"><a href="#为什么需要伪目标" class="headerlink" title="为什么需要伪目标"></a>为什么需要伪目标</h3><p>对于已经存在的文件，其没有依赖文件，所以它永远是最新的，所以根据make的规则clean目标下的命令是不会被执行的。</p>
+<h3 id="2-为什么需要伪目标"><a href="#2-为什么需要伪目标" class="headerlink" title="2. 为什么需要伪目标"></a>2. 为什么需要伪目标</h3><p>对于已经存在的文件，其没有依赖文件，所以它永远是最新的，所以根据make的规则clean目标下的命令是不会被执行的。</p>
 <p>假设当前目录下已有<code>clean</code>文件，则根据 make 解析过程，不会执行后续<code>command</code>.</p>
 <p>这里是一个例子：<a href="https://www.cnblogs.com/idorax/p/9306528.html" target="_blank" rel="noopener">link</a></p>
-<h3 id="什么是伪目标-PHONY"><a href="#什么是伪目标-PHONY" class="headerlink" title="什么是伪目标(.PHONY)"></a>什么是伪目标(.PHONY)</h3><p>伪目标相对于目标而言，其不会生成实体文件。（注：因为target默认是文件（执行文件、target文件、标签），执行make命令以后，会生成一个具体的可执行文件）</p>
-<h3 id="伪目标的作用"><a href="#伪目标的作用" class="headerlink" title="伪目标的作用"></a>伪目标的作用</h3><p>显式告诉make不要跟实体文件进行关联判断，以便执行相应的命令。会忽略已经存在的同名文件，继续执行命令</p>
+<h3 id="3-什么是伪目标-PHONY"><a href="#3-什么是伪目标-PHONY" class="headerlink" title="3. 什么是伪目标(.PHONY)"></a>3. 什么是伪目标(.PHONY)</h3><p>伪目标相对于目标而言，其不会生成实体文件。（注：因为target默认是文件（执行文件、target文件、标签），执行make命令以后，会生成一个具体的可执行文件）</p>
+<h3 id="4-伪目标的作用"><a href="#4-伪目标的作用" class="headerlink" title="4. 伪目标的作用"></a>4. 伪目标的作用</h3><p>显式告诉make不要跟实体文件进行关联判断，以便执行相应的命令。会忽略已经存在的同名文件，继续执行命令</p>
 <p>参考文档：</p>
 <p><a href="http://qianchenglong.github.io/2015/01/08/makefile-PHONY%E4%BD%9C%E7%94%A8/" target="_blank" rel="noopener">http://qianchenglong.github.io/2015/01/08/makefile-PHONY%E4%BD%9C%E7%94%A8/</a></p>
 <p><a href="https://seisman.github.io/how-to-write-makefile/introduction.html" target="_blank" rel="noopener">https://seisman.github.io/how-to-write-makefile/introduction.html</a></p>
@@ -488,14 +486,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">makefile</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">linux</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">log</a>
               </li>
              
@@ -504,7 +494,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">tcp</a>
+                <a href="javascript:void(0)" class="js-tag color4">makefile</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">linux</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -512,11 +506,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">编译</a>
+                <a href="javascript:void(0)" class="js-tag color4">tcp</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">defer</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">编译</a>
               </li>
              
               <li class="article-tag-list-item">
