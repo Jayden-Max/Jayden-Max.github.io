@@ -6,20 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Hello World | ZZJ-Blog</title>
+  <title>.PHONY原理与作用 | ZZJ-Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
-<meta name="keywords" content="golang, java, pyhon">
+  <meta name="description" content="单词phony：伪造的，假的。`If you describe something as phoney, you disapprove of if because it is false ranther than genuine.  在Makefile中，.PHONY后面的target表示的也是一个伪造的target, 而不是真实存在的文件target，注意Makefile的target默认是文件">
+<meta name="keywords" content="makefile,linux">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://yoursite.com/2019/04/20/hello-world/index.html">
+<meta property="og:title" content=".PHONY原理与作用">
+<meta property="og:url" content="http://yoursite.com/2019/11/14/PHONY原理与作用/index.html">
 <meta property="og:site_name" content="ZZJ-Blog">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta property="og:description" content="单词phony：伪造的，假的。`If you describe something as phoney, you disapprove of if because it is false ranther than genuine.  在Makefile中，.PHONY后面的target表示的也是一个伪造的target, 而不是真实存在的文件target，注意Makefile的target默认是文件">
 <meta property="og:locale" content="zh-cn">
-<meta property="og:updated_time" content="2019-04-20T13:25:58.524Z">
+<meta property="og:updated_time" content="2019-11-14T06:32:59.605Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello World">
-<meta name="twitter:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta name="twitter:title" content=".PHONY原理与作用">
+<meta name="twitter:description" content="单词phony：伪造的，假的。`If you describe something as phoney, you disapprove of if because it is false ranther than genuine.  在Makefile中，.PHONY后面的target表示的也是一个伪造的target, 而不是真实存在的文件target，注意Makefile的target默认是文件">
   
     <link rel="alternative" href="/atom.xml" title="ZZJ-Blog" type="application/atom+xml">
   
@@ -177,35 +177,68 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-hello-world" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-PHONY原理与作用" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      Hello World
+      .PHONY原理与作用
     </h1>
   
 
         
-        <a href="/2019/04/20/hello-world/" class="archive-article-date">
-  	<time datetime="2019-04-20T13:25:58.524Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-04-20</time>
+        <a href="/2019/11/14/PHONY原理与作用/" class="archive-article-date">
+  	<time datetime="2019-11-14T06:30:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-14</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+        <p>单词phony：伪造的，假的。`If you describe something as phoney, you disapprove of if because it is false ranther than genuine.</p>
+<blockquote>
+<p>在Makefile中，.PHONY后面的target表示的也是一个伪造的target, 而不是真实存在的文件target，注意Makefile的target默认是文件。</p>
+</blockquote>
+<a id="more"></a>
+<h3 id="先看makefile核心规则"><a href="#先看makefile核心规则" class="headerlink" title="先看makefile核心规则"></a>先看makefile核心规则</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">target: prerequisites</span><br><span class="line">    command...</span><br></pre></td></tr></table></figure>
+<p>make解析执行makefile判断过程：</p>
+<ul>
+<li><p>若target不存在，则根据prerequisites，执行command</p>
+</li>
+<li><p>若target已存在，则比较target和prerequisites修改时间</p>
+<ul>
+<li><p>若prerequisites不存在，则不执行command。</p>
+</li>
+<li><p>若prerequisites比target新，则执行command（说明在生成target后，对依赖文件进行了修改）。</p>
+</li>
+<li><p>若prerequisites没有target新，则不执行command。</p>
+</li>
+</ul>
+</li>
+</ul>
+<ol>
+<li><p>target</p>
+<p> 可以是一个object file（目标文件），也可以是一个执行文件，还可以是一个标签（label）。对 于标签这种特性，在后续的“伪目标”章节中会有叙述。</p>
+</li>
+<li><p>prerequisites</p>
+<p> 生成该target所依赖的文件和/或target</p>
+</li>
+<li><p>command</p>
+<p> 该target要执行的命令（任意的shell命令）</p>
+</li>
+</ol>
+<p><strong><code>prerequisites中如果有一个以上的文件比target文件要新的话，command所定义的命令就会被执行。</code></strong></p>
+<p>这就是makefile的规则，也就是makefile中最核心的内容。</p>
+<h3 id="为什么需要伪目标"><a href="#为什么需要伪目标" class="headerlink" title="为什么需要伪目标"></a>为什么需要伪目标</h3><p>对于已经存在的文件，其没有依赖文件，所以它永远是最新的，所以根据make的规则clean目标下的命令是不会被执行的。</p>
+<p>假设当前目录下已有<code>clean</code>文件，则根据 make 解析过程，不会执行后续<code>command</code>.</p>
+<p>这里是一个例子：<a href="https://www.cnblogs.com/idorax/p/9306528.html" target="_blank" rel="noopener">link</a></p>
+<h3 id="什么是伪目标-PHONY"><a href="#什么是伪目标-PHONY" class="headerlink" title="什么是伪目标(.PHONY)"></a>什么是伪目标(.PHONY)</h3><p>伪目标相对于目标而言，其不会生成实体文件。（注：因为target默认是文件（执行文件、target文件、标签），执行make命令以后，会生成一个具体的可执行文件）</p>
+<h3 id="伪目标的作用"><a href="#伪目标的作用" class="headerlink" title="伪目标的作用"></a>伪目标的作用</h3><p>显式告诉make不要跟实体文件进行关联判断，以便执行相应的命令。会忽略已经存在的同名文件，继续执行命令</p>
+<p>参考文档：</p>
+<p><a href="http://qianchenglong.github.io/2015/01/08/makefile-PHONY%E4%BD%9C%E7%94%A8/" target="_blank" rel="noopener">http://qianchenglong.github.io/2015/01/08/makefile-PHONY%E4%BD%9C%E7%94%A8/</a></p>
+<p><a href="https://seisman.github.io/how-to-write-makefile/introduction.html" target="_blank" rel="noopener">https://seisman.github.io/how-to-write-makefile/introduction.html</a></p>
 
       
 
@@ -235,7 +268,33 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">makefile</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">linux</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/makefile//" class="article-tag-list-link color4">makefile</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
 
       
 
@@ -285,7 +344,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/04/20/hello-world/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/11/14/PHONY原理与作用/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -299,15 +358,11 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/04/20/TCP连接池-TCP-UDP知识/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          TCP连接池 &amp; TCP/UDP知识
-        
-      </div>
-    </a>
   
+    <a href="/2019/11/13/Go-log（二）/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Go-log（二）</div>
+      <i class="icon-circle-right"></i>
+    </a>
   
 </nav>
 

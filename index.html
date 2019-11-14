@@ -61,7 +61,13 @@
 			
 				<li><a href="/">主页</a></li>
 	        
-				<li><a href="/tags/随笔/">随笔</a></li>
+				<li><a href="/about/">关于</a></li>
+	        
+				<li><a href="/tags/">标签</a></li>
+	        
+				<li><a href="/categories/">分类</a></li>
+	        
+				<li><a href="/archives/">归档</a></li>
 	        
 			</ul>
 		</nav>
@@ -121,6 +127,12 @@
 			
 				
 			
+				
+			
+				
+			
+				
+			
 			
 			
 			<nav class="header-nav">
@@ -138,12 +150,18 @@
 			</nav>
 
 			<nav class="header-menu js-header-menu">
-				<ul style="width: 50%">
+				<ul style="width: 70%">
 				
 				
-					<li style="width: 50%"><a href="/">主页</a></li>
+					<li style="width: 20%"><a href="/">主页</a></li>
 		        
-					<li style="width: 50%"><a href="/tags/随笔/">随笔</a></li>
+					<li style="width: 20%"><a href="/about/">关于</a></li>
+		        
+					<li style="width: 20%"><a href="/tags/">标签</a></li>
+		        
+					<li style="width: 20%"><a href="/categories/">分类</a></li>
+		        
+					<li style="width: 20%"><a href="/archives/">归档</a></li>
 		        
 				</ul>
 			</nav>
@@ -159,6 +177,388 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-PHONY原理与作用" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/14/PHONY原理与作用/">.PHONY原理与作用</a>
+    </h1>
+  
+
+        
+        <a href="/2019/11/14/PHONY原理与作用/" class="archive-article-date">
+  	<time datetime="2019-11-14T06:30:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-14</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>单词phony：伪造的，假的。`If you describe something as phoney, you disapprove of if because it is false ranther than genuine.</p>
+<blockquote>
+<p>在Makefile中，.PHONY后面的target表示的也是一个伪造的target, 而不是真实存在的文件target，注意Makefile的target默认是文件。</p>
+</blockquote>
+        
+          <a class="article-more-a" href="/2019/11/14/PHONY原理与作用/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">makefile</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">linux</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/makefile//" class="article-tag-list-link color4">makefile</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/11/14/PHONY原理与作用/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+<!-- 目录内容 -->
+
+<!-- 目录内容结束 -->
+  
+    <article id="post-Go-log（二）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/13/Go-log（二）/">Go-log（二）</a>
+    </h1>
+  
+
+        
+        <a href="/2019/11/13/Go-log（二）/" class="archive-article-date">
+  	<time datetime="2019-11-13T11:55:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-13</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="针对logrus定制"><a href="#针对logrus定制" class="headerlink" title="针对logrus定制"></a>针对logrus定制</h2><p>添加根据日志大小进行分割+打印文件名和行号，会根据level显示颜色</p>
+<p>以下是实例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">INFO[2019-11-13T10:03:19+08:00] register method: /create_activity to router   Line=&quot;third_evaluation/service/third_evaluation/transports.go:23&quot;</span><br><span class="line">INFO[2019-11-13T10:03:19+08:00] register method: /init_answer_sheet to router  Line=&quot;third_evaluation/service/third_evaluation/transports.go:26&quot;</span><br><span class="line">INFO[2019-11-13T10:03:19+08:00] register method: /save_answer_sheet to router  Line=&quot;third_evaluation/service/third_evaluation/transports.go:29&quot;</span><br><span class="line">INFO[2019-11-13T10:03:19+08:00] register method: /get_report to router        Line=&quot;third_evaluation/service/third_evaluation/transports.go:32&quot;</span><br><span class="line">INFO[2019-11-13T10:03:19+08:00] register method: /get_report_url to router    Line=&quot;third_evaluation/service/third_evaluation/transports.go:35&quot;</span><br><span class="line">WARN[2019-11-13T10:03:19+08:00] Http Server start at port:63333               Line=&quot;third_evaluation/service/third_evaluation/register.go:58&quot;</span><br><span class="line">ERRO[2019-11-13T10:03:20+08:00] ErrChan: signal Notify: [interrupt]           Line=&quot;third_evaluation/service/third_evaluation/register.go:69&quot;</span><br></pre></td></tr></table></figure>
+        
+          <a class="article-more-a" href="/2019/11/13/Go-log（二）/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">log</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">golang</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/golang//" class="article-tag-list-link color2">golang</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/11/13/Go-log（二）/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+<!-- 目录内容 -->
+
+<!-- 目录内容结束 -->
+  
+    <article id="go-Go-log（一）" class="article article-type-go  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/13/Go-log（一）/">Go-log(一)</a>
+    </h1>
+  
+
+        
+        <a href="/2019/11/13/Go-log（一）/" class="archive-article-date">
+  	<time datetime="2019-11-13T11:45:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-13</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Go-log日志（一）"><a href="#Go-log日志（一）" class="headerlink" title="Go log日志（一）"></a>Go log日志（一）</h2><p><code>go</code> 本身日志包比较简单，第三方<code>log</code>包比较多，<code>golang</code>中,流行的日志框架包括logrus、zap等。</p>
+<ul>
+<li><p>logrus是目前Github上star数量最多的日志库；star多</p>
+</li>
+<li><p>zap是Uber推出的一个快速、结构化的分级日志库；性能好</p>
+</li>
+</ul>
+        
+          <a class="article-more-a" href="/2019/11/13/Go-log（一）/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">log</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">golang</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/golang//" class="article-tag-list-link color2">golang</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/11/13/Go-log（一）/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+<!-- 目录内容 -->
+
+<!-- 目录内容结束 -->
+  
+    <article id="post-编译与链接详解-C语言-md" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/13/编译与链接详解-C语言-md/">编译与链接详解-C语言.md</a>
+    </h1>
+  
+
+        
+        <a href="/2019/11/13/编译与链接详解-C语言-md/" class="archive-article-date">
+  	<time datetime="2019-11-13T07:28:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-13</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="编译和链接详解-C语言"><a href="#编译和链接详解-C语言" class="headerlink" title="编译和链接详解-C语言"></a>编译和链接详解-C语言</h2><p><a href="http://c.biancheng.net/view/1736.html" target="_blank" rel="noopener"></a></p>
+<p>我们平时所说的程序，是指双击后就可以直接运行的程序，这样的程序被称为可执行程序（Executable Program）。在 Windows 下，可执行程序的后缀有.exe和.com（其中.exe比较常见）；在类 UNIX 系统（Linux、Mac OS等）下，可执行程序没有特定的后缀，系统根据文件的头部信息来判断是否是可执行程序。</p>
+<p>可执行程序的内部是一系列计算机指令和数据的集合，它们都是二进制形式的，CPU可以直接识别，毫无障碍；但是对于程序员，它们非常晦涩，难以记忆<br>和使用。</p>
+<p>在计算机发展的初期，程序员就是使用这样的二进制指令来编写程序的，那个拓荒的年代还没有编程语言。</p>
+        
+          <a class="article-more-a" href="/2019/11/13/编译与链接详解-C语言-md/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">编译</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/golang//" class="article-tag-list-link color2">golang</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/11/13/编译与链接详解-C语言-md/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+<!-- 目录内容 -->
+
+<!-- 目录内容结束 -->
   
     <article id="post-跳过https验证" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
@@ -248,7 +648,9 @@
 
 
 
+<!-- 目录内容 -->
 
+<!-- 目录内容结束 -->
   
     <article id="post-页面置换算法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
@@ -344,7 +746,9 @@
 
 
 
+<!-- 目录内容 -->
 
+<!-- 目录内容结束 -->
   
     <article id="post-Sublime-text-3-install-Gosublime" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
@@ -393,11 +797,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">sublime</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">golang</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">golang</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">sublime</a>
         		</li>
       		
 		</ul>
@@ -435,7 +839,9 @@
 
 
 
+<!-- 目录内容 -->
 
+<!-- 目录内容结束 -->
   
     <article id="post-defer执行顺序" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
@@ -515,7 +921,9 @@
 
 
 
+<!-- 目录内容 -->
 
+<!-- 目录内容结束 -->
   
     <article id="post-TCP连接池-TCP-UDP知识" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
@@ -612,7 +1020,9 @@
 
 
 
+<!-- 目录内容 -->
 
+<!-- 目录内容结束 -->
   
     <article id="post-hello-world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
@@ -683,7 +1093,9 @@
 
 
 
+<!-- 目录内容 -->
 
+<!-- 目录内容结束 -->
   
   
 
@@ -778,7 +1190,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">sublime</a>
+                <a href="javascript:void(0)" class="js-tag color4">makefile</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">linux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">log</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -787,6 +1207,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">tcp</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">sublime</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">编译</a>
               </li>
              
               <li class="article-tag-list-item">

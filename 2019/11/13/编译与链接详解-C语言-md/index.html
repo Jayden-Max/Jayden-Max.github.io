@@ -6,20 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Hello World | ZZJ-Blog</title>
+  <title>编译与链接详解-C语言.md | ZZJ-Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
-<meta name="keywords" content="golang, java, pyhon">
+  <meta name="description" content="编译和链接详解-C语言 我们平时所说的程序，是指双击后就可以直接运行的程序，这样的程序被称为可执行程序（Executable Program）。在 Windows 下，可执行程序的后缀有.exe和.com（其中.exe比较常见）；在类 UNIX 系统（Linux、Mac OS等）下，可执行程序没有特定的后缀，系统根据文件的头部信息来判断是否是可执行程序。 可执行程序的内部是一系列计算机指令和数据的">
+<meta name="keywords" content="编译">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://yoursite.com/2019/04/20/hello-world/index.html">
+<meta property="og:title" content="编译与链接详解-C语言.md">
+<meta property="og:url" content="http://yoursite.com/2019/11/13/编译与链接详解-C语言-md/index.html">
 <meta property="og:site_name" content="ZZJ-Blog">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta property="og:description" content="编译和链接详解-C语言 我们平时所说的程序，是指双击后就可以直接运行的程序，这样的程序被称为可执行程序（Executable Program）。在 Windows 下，可执行程序的后缀有.exe和.com（其中.exe比较常见）；在类 UNIX 系统（Linux、Mac OS等）下，可执行程序没有特定的后缀，系统根据文件的头部信息来判断是否是可执行程序。 可执行程序的内部是一系列计算机指令和数据的">
 <meta property="og:locale" content="zh-cn">
-<meta property="og:updated_time" content="2019-04-20T13:25:58.524Z">
+<meta property="og:updated_time" content="2019-11-13T12:04:34.048Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello World">
-<meta name="twitter:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta name="twitter:title" content="编译与链接详解-C语言.md">
+<meta name="twitter:description" content="编译和链接详解-C语言 我们平时所说的程序，是指双击后就可以直接运行的程序，这样的程序被称为可执行程序（Executable Program）。在 Windows 下，可执行程序的后缀有.exe和.com（其中.exe比较常见）；在类 UNIX 系统（Linux、Mac OS等）下，可执行程序没有特定的后缀，系统根据文件的头部信息来判断是否是可执行程序。 可执行程序的内部是一系列计算机指令和数据的">
   
     <link rel="alternative" href="/atom.xml" title="ZZJ-Blog" type="application/atom+xml">
   
@@ -177,35 +177,62 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-hello-world" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-编译与链接详解-C语言-md" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      Hello World
+      编译与链接详解-C语言.md
     </h1>
   
 
         
-        <a href="/2019/04/20/hello-world/" class="archive-article-date">
-  	<time datetime="2019-04-20T13:25:58.524Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-04-20</time>
+        <a href="/2019/11/13/编译与链接详解-C语言-md/" class="archive-article-date">
+  	<time datetime="2019-11-13T07:28:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-13</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+        <h2 id="编译和链接详解-C语言"><a href="#编译和链接详解-C语言" class="headerlink" title="编译和链接详解-C语言"></a>编译和链接详解-C语言</h2><p><a href="http://c.biancheng.net/view/1736.html" target="_blank" rel="noopener"></a></p>
+<p>我们平时所说的程序，是指双击后就可以直接运行的程序，这样的程序被称为可执行程序（Executable Program）。在 Windows 下，可执行程序的后缀有.exe和.com（其中.exe比较常见）；在类 UNIX 系统（Linux、Mac OS等）下，可执行程序没有特定的后缀，系统根据文件的头部信息来判断是否是可执行程序。</p>
+<p>可执行程序的内部是一系列计算机指令和数据的集合，它们都是二进制形式的，CPU可以直接识别，毫无障碍；但是对于程序员，它们非常晦涩，难以记忆<br>和使用。</p>
+<p>在计算机发展的初期，程序员就是使用这样的二进制指令来编写程序的，那个拓荒的年代还没有编程语言。</p>
+<a id="more"></a>
+<p>直接使用二进制指令编程对程序员来说简直是噩梦，尤其是当程序比较大的时候，不但编写麻烦，需要频繁查询指令手册，而且除错会异常苦恼，要直接面对一堆二进制数据，让人眼花缭乱。另外，用二进制指令编程步骤繁琐，要考虑各种边界情况和底层问题，开发效率十分低下。</p>
+<p>这就倒逼程序员开发出了编程语言，提高自己的生产力，例如汇编、C语言、C++、Java、Python、Go语言等，都是在逐步提高开发效率。至此，编程终于不再是只有极客能做的事情了，不了解计算机的读者经过一定的训练也可以编写出有模有样的程序。</p>
+<h3 id="编译（Compile）"><a href="#编译（Compile）" class="headerlink" title="编译（Compile）"></a>编译（Compile）</h3><p>C语言代码由固定的词汇按照固定的格式组织起来，简单直观，程序员容易识别和理解，但是对于CPU，C语言代码就是天书，根本不认识，CPU只认识几百个二进制形式的指令。这就需要一个工具，将C语言代码转换成CPU能够识别的二进制指令，也就是将代码加工成 .exe 程序的格式；这个工具是一个特殊的软件，叫做<strong>编译器（Compiler）</strong>。</p>
+<p>编译器能够识别代码中的词汇、句子以及各种特定的格式，并将他们转换成计算机能够识别的二进制形式，这个过程称为<strong>编译（Compile）</strong>。</p>
+<p>编译也可以理解为“翻译”，类似于将中文翻译成英文、将英文翻译成象形文字，它是一个复杂的过程，大致包括词法分析、语法分析、语义分析、性能优化、生成可执行文件五个步骤，期间涉及到复杂的算法和硬件架构。对于学计算机或者软件的大学生，“编译原理”是一门专业课程，有兴趣的读者请自行阅读《编译原理》一书，这里我们不再展开讲解。</p>
+<p><code>注意：不了解编译原理并不影响我们学习C语言，我也不建议初学者去钻研编译原理，贪多嚼不烂，不要把自己绕进去。</code></p>
+<p><strong>C语言的编译器有很多种，不同的平台下有不同的编译器，例如：</strong></p>
+<ul>
+<li>Windows 下常用的是微软开发的 Visual C++，它被集成在 Visual Studio 中，一般不单独使用；</li>
+<li>Linux 下常用的是 GUN 组织开发的 GCC，很多 Linux 发行版都自带 GCC；</li>
+<li>Mac 下常用的是 LLVM/Clang，它被集成在 Xcode 中（Xcode 以前集成的是 GCC，后来由于 GCC 的不配合才改为 LLVM/Clang，LLVM/Clang 的性能比 GCC 更加强大）。</li>
+</ul>
+<p>你的代码语法正确与否，编译器说了才算，我们学习C语言，从某种意义上说就是学习如何使用编译器。</p>
+<p>编译器可以 100% 保证你的代码从语法上讲是正确的，因为哪怕有一点小小的错误，编译也不能通过，编译器会告诉你哪里错了，便于你的更改。</p>
+<h3 id="链接（Link）"><a href="#链接（Link）" class="headerlink" title="链接（Link）"></a>链接（Link）</h3><ol>
+<li><p>C语言代码经过编译以后，并没有生成最终的可执行文件（.exe 文件），而是生成了一种叫做<strong>目标文件（Object File）</strong>的中间文件（或者说临时文件）。目标文件也是二进制形式的，它和可执行文件的格式是一样的。对于 Visual C++，目标文件的后缀是<code>.obj</code>；对于 GCC，目标文件的后缀是<code>.o</code>。</p>
+</li>
+<li><p>目标文件经过链接（Link）以后才能变成可执行文件。既然目标文件和可执行文件的格式是一样的，为什么还要再链接一次呢，直接作为可执行文件不行吗？</p>
+<p> 不行的！因为编译只是将我们自己写的代码变成了二进制形式，它还需要和系统组件（比如标准库、动态链接库等）结合起来，这些组件都是程序运行所必须的。</p>
+</li>
+<li><p><strong>链接（Link）</strong>其实就是一个“打包”的过程，它将所有二进制形式的目标文件和系统组件组合成一个可执行文件。完成链接的过程也需要一个特殊的软件，叫做<strong>链接器（Linker）</strong>。</p>
+</li>
+</ol>
+<p>随着我们学习的深入，我们编写的代码越来越多，最终需要将它们分散到多个源文件中，<strong>编译器每次只能编译一个源文件，生成一个目标文件，</strong>这个时候，链接器除了将目标文件和系统组件组合起来，还需要将编译器生成的<strong>多个目标文件组合起来。</strong></p>
+<p>再次强调，编译是针对一个源文件的，有多少个源文件就需要编译多少次，就会生成多少个目标文件。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>不管我们编写的代码有多么简单，都必须经过<strong>「编译 –&gt; 链接」</strong>的过程才能生成可执行文件：</p>
+<ul>
+<li>编译就是将我们编写的源代码“翻译”成计算机可以识别的二进制格式，它们以目标文件的形式存在；</li>
+<li>链接就是一个“打包”的过程，它将所有的目标文件以及系统组件组合成一个可执行文件。</li>
+</ul>
+<p>如果不是特别强调，一般情况下我们<strong>所说的“编译器”实际上也<code>包括了链接器</code></strong>。</p>
 
       
 
@@ -235,7 +262,29 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">编译</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/golang//" class="article-tag-list-link color2">golang</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
 
       
 
@@ -285,7 +334,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/04/20/hello-world/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/11/13/编译与链接详解-C语言-md/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -299,15 +348,20 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/04/20/TCP连接池-TCP-UDP知识/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2019/11/13/Go-log（一）/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          TCP连接池 &amp; TCP/UDP知识
+          Go-log(一)
         
       </div>
     </a>
   
+  
+    <a href="/2019/11/13/跳过https验证/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">跳过https验证</div>
+      <i class="icon-circle-right"></i>
+    </a>
   
 </nav>
 
